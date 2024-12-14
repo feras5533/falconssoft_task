@@ -58,7 +58,8 @@ class HomeView extends StatelessWidget {
 
           return LiquidPullToRefresh(
             onRefresh: () async {
-              await controller.fetchAndStoreData(showLoadingIndicator: false);
+              await controller.fetchAndStoreData(
+                  showLoadingIndicator: false, isRefreshTriggeredByUser: true);
             },
             color: AppTheme.primaryBlue,
             backgroundColor: AppTheme.background,

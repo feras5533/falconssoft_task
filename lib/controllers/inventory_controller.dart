@@ -23,7 +23,9 @@ class InventoryController extends GetxController {
     fetchAndStoreData();
   }
 
-  Future<void> fetchAndStoreData({bool showLoadingIndicator = true}) async {
+  Future<void> fetchAndStoreData(
+      {bool showLoadingIndicator = true,
+      bool isRefreshTriggeredByUser = false}) async {
     try {
       if (showLoadingIndicator) {
         isLoading.value = true;
@@ -51,11 +53,13 @@ class InventoryController extends GetxController {
       items.value = mergedData;
       filteredItems.value = mergedData;
 
-      showCustomSnackBar(
-        title: 'Data Refreshed',
-        message: 'Inventory list has been updated successfully.',
-        isError: false,
-      );
+      if (isRefreshTriggeredByUser) {
+        showCustomSnackBar(
+          title: 'Data Refreshed',
+          message: 'Inventory list has been updated successfully.',
+          isError: false,
+        );
+      }
     } catch (e) {
       showCustomSnackBar(
         title: 'Error',
